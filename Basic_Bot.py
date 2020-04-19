@@ -11,3 +11,9 @@ class MyClient(discord.Client):
 
 client = MyClient()
 client.run("[Use your own token here]")
+
+
+# Sample Output:
+# Ich habe mich eingeloggt. Beep Bop. Ich diene Spandau. Bop Beep.
+# Nachricht von zer0se7ense7en#4074 enthält test
+# Nachricht von zer0se7ense7en#4074 enthält test123
