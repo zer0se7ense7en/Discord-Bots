@@ -1,0 +1,54 @@
+import discord
+import random
+
+nicecount = {}
+
+def update_leaderboard(author):
+    #for member in members
+    file = open("nicetable.txt", "w")  # change to append mode
+
+    file.write(str(nicecount))
+
+    file.close()
+
+class MyClient(discord.Client):
+    #Einloggen
+    async def on_ready(self):
+        print("Ich habe mich eingeloggt. Beep Bop. Ich diene Spandau. Bop Beep.")
+
+    #Wenn Nachricht gepostet wird
+    async def on_message(self, message):
+        if message.author == client.user:
+            return #bei eigener nachricht nichts machen
+
+        if message.content.startswith("Hello Big Brother"):
+            await message.channel.send("Hello " + str(message.author) + ". I'm watching you.")
+            await message.author.send("Hello " + str(message.author) + ". I'm watching you.")
+
+        # auf nice reagieren mit leaderboard
+        if "nice" in str(message.content).lower():
+            await message.channel.send("I detected a nice!")
+
+        # auf np reagieren mit npd
+        if "np" in str(message.content).lower():
+            ergebnis = random.randrange(0,2)
+            print(ergebnis)
+            if ergebnis is 1:
+                await message.channel.send("...d?\nDid you mean NPD " + str(message.author) + "?")
+            else:
+                return
+
+        # leaderboard neu berechnen mit history
+        if str(message.content) == "$create_leaderboard" and str(message.author) == "zer0se7ense7en#4074":
+            messages = await message.channel.history(limit=100).flatten()
+            for i in messages:
+                print(i.content)
+
+        if message.content.startswith("pls porn"):
+            await message.delete()
+            await message.channel.send("Diese Nachricht wurde gelöscht durch Big Brother!" + "Anzeige ist raus!\nSchäm dich " + str(message.author) + " !")
+            await message.author.send("Du hast etwas böses getan! Da ich ein Bot bin, habe ich keine Ahnung was du getan hast, aber es war wahrscheinlich nicht gut!\nJetzt stecke 50ct in die Schäm-Dich-Box\n\n\tBig Brother over and out,\n\tIch diene Spandau!")
+
+
+client = MyClient()
+client.run("<your own token here>")
