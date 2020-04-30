@@ -22,8 +22,8 @@ class MyClient(discord.Client):
             return #bei eigener nachricht nichts machen
 
         if message.content.startswith("Hello Big Brother"):
-            await message.channel.send("Hello " + str(message.author) + ". I'm watching you.")
-            await message.author.send("Hello " + str(message.author) + ". I'm watching you.")
+            await message.channel.send("Hello " + str(message.author).split('#')[0] + ". I'm watching you.")
+            await message.author.send("Hello " + str(message.author).split('#')[0] + ". I'm watching you.")
 
         # auf nice reagieren mit leaderboard
         if "nice" in str(message.content).lower():
@@ -34,7 +34,7 @@ class MyClient(discord.Client):
             ergebnis = random.randrange(0,2)
             print(ergebnis)
             if ergebnis is 1:
-                await message.channel.send("...d?\nDid you mean NPD " + str(message.author) + "?")
+                await message.channel.send("...d?\nDid you mean NPD " + str(message.author).split('#')[0] + "?")
             else:
                 return
 
@@ -46,8 +46,9 @@ class MyClient(discord.Client):
 
         if message.content.startswith("pls porn"):
             await message.delete()
-            await message.channel.send("Diese Nachricht wurde gelöscht durch Big Brother!" + "Anzeige ist raus!\nSchäm dich " + str(message.author) + " !")
+            await message.channel.send("Diese Nachricht wurde gelöscht durch Big Brother!" + "Anzeige ist raus!\nSchäm dich " + str(message.author).split('#')[0] + " !")
             await message.author.send("Du hast etwas böses getan! Da ich ein Bot bin, habe ich keine Ahnung was du getan hast, aber es war wahrscheinlich nicht gut!\nJetzt stecke 50ct in die Schäm-Dich-Box\n\n\tBig Brother over and out,\n\tIch diene Spandau!")
+
 
 
 client = MyClient()
